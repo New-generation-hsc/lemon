@@ -1,0 +1,402 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>lemonlist</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'lib/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
+  <!-- jQuery library -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<body>
+  <div class="dialog-bg" id="background"></div>
+  <div class="dialog-row" id="dialog_projects">
+      <div class="newproject-dialog">
+          <div class="dialog-header">
+              <span>创建任务清单</span>
+              <span><i class="fa fa-close close-btn"></i></span>
+          </div>
+          <form action="project" method="POST">
+            {% csrf_token %}
+          <div class="project-input">
+            <span><i class="fa fa-hand-o-right"></i></span>
+              <input type="text" placeholder="清单名称" id="project_content" name="name">
+          </div>
+          <div class="projects">
+              <span><i class="fa fa-tasks"></i>学习</span>
+              <span><i class="fa fa-tasks"></i>旅游</span>
+              <span><i class="fa fa-tasks"></i>工作</span>
+              <span><i class="fa fa-tasks"></i>电影</span>
+              <span><i class="fa fa-tasks"></i>生活</span>
+          </div>
+          <div class="separator">
+              <span></span>
+              <span>选择一种颜色</span>
+              <span></span>
+          </div>
+          <div class="color-picker" id="project_color">
+            <div><span class="color-item color0" ></span></div>
+            <div><span class="color-item color1" ></span></div>
+            <div><span class="color-item color2" ></span></div>
+            <div><span class="color-item color3" ></span></div>
+            <div><span class="color-item color4" ></span></div>
+            <div><span class="color-item color5" ></span></div>
+            <div><span class="color-item color6" ></span></div>
+            <div><span class="color-item color7" ></span></div>
+            <div><span class="color-item color8" ></span></div>
+            <div><span class="color-item color9" ></span></div>
+            <div><span class="color-item color10" ></span></div>
+            <div><span class="color-item color11" ></span></div>
+            <div><span class="color-item color12" ></span></div>
+            <div><span class="color-item color13" ></span></div>
+            <div><span class="color-item color14" ></span></div>
+            <div><span class="color-item color15" ></span></div>
+            <div><span class="color-item color16" ></span></div>
+            <div><span class="color-item color17" ></span></div>
+            <div><span class="color-item color18" ></span></div>
+            <div><span class="color-item color19" ></span></div>
+          </div>
+          <div class="dialog-footer">
+            <input type="button" name="cancel" value="取消" class="close-btn">
+            <input type="hidden" name="color" id="project_color_index" value="0">
+            <input type="submit" name="submit" value="确认">
+          </div>
+          </form>
+      </div>
+  </div>
+  <div class="dialog-row" id="dialog-tags">
+      <div class="newproject-dialog">
+          <div class="dialog-header">
+              <span>创建任务标签</span>
+              <span><i class="fa fa-close tag-close"></i></span>
+          </div>
+          <form action="newtag" method="POST">
+            {% csrf_token %}
+          <div class="project-input">
+            <span><i class="fa fa-hand-o-right"></i></span>
+              <input type="text" placeholder="标签名称" name="name">
+          </div>
+          <div class="all-tags">
+            <span>北京</span>
+            <span>算法</span>
+            <span>编程</span>
+            <span>电影</span>
+            <span>生活</span>
+          </div>
+          <div class="separator">
+            <span></span>
+            <span>选择一种颜色</span>
+            <span></span>
+          </div>
+          <div class="color-picker" id="tags_color">
+            <div><span class="color-item color0" ></span></div>
+            <div><span class="color-item color1" ></span></div>
+            <div><span class="color-item color2" ></span></div>
+            <div><span class="color-item color3" ></span></div>
+            <div><span class="color-item color4" ></span></div>
+            <div><span class="color-item color5" ></span></div>
+            <div><span class="color-item color6" ></span></div>
+            <div><span class="color-item color7" ></span></div>
+            <div><span class="color-item color8" ></span></div>
+            <div><span class="color-item color9" ></span></div>
+            <div><span class="color-item color10" ></span></div>
+            <div><span class="color-item color11" ></span></div>
+            <div><span class="color-item color12" ></span></div>
+            <div><span class="color-item color13" ></span></div>
+            <div><span class="color-item color14" ></span></div>
+            <div><span class="color-item color15" ></span></div>
+            <div><span class="color-item color16" ></span></div>
+            <div><span class="color-item color17" ></span></div>
+            <div><span class="color-item color18" ></span></div>
+            <div><span class="color-item color19" ></span></div>
+          </div>
+          <div class="dialog-footer">
+            <input type="button" name="cancel" value="取消" class="tag-close">
+            <input type="hidden" name="color" id="tag_color_index" value="0">
+            <input type="submit" name="submit" value="确认" >
+          </div>
+          </form>
+      </div>
+  </div>
+  <div class="main-body">
+  <div class="header">
+      <div class="lemon-logo">
+        <span>
+            <i class="fa fa-envira color-white logo-icon" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="search">
+          <div class="search-wrapper">
+              <span class="search-icon"><i class="fa fa-search place-icon"></i></span>
+              <input type="text" name="search" placeholder="快速查找" id="taskSearch">
+          </div>
+      </div>
+      <div class="top-icons">
+          <span class="add-task">
+              <i class="fa fa-plus color-white"></i>
+          </span>
+          <span class="complete">
+              <i class="fa fa-diamond color-white"></i>
+          </span>
+          <span class="remind">
+              <i class="fa fa-bell color-white"></i>
+          </span>
+          <span class="setting">
+              <i class="fa fa-gear  fa-fw color-white"></i>
+          </span>
+      </div>
+  </div>
+  <div class="main">
+      <div class="sidebar" id="side">
+          <div id="avatar">
+              <img src="{% static 'img/avatar.jpg' %}">
+          </div>
+          <div id="nickname">
+              <span>金际一线天</span>
+          </div>
+          <div id="full_name">
+            <div><span>黄世财</span><span class="gender"><i class="fa fa-venus male"></i></span></div>
+          </div>
+          <div class="left-menu">
+              <div class="list-menu">
+                  <div class="tasks-manager">
+                      <div class="all-task">
+                          <span><i class="fa fa-inbox"></i></span>
+                          <span class="task-text">收件箱</span>
+                      </div>
+                      <div class="today-task">
+                          <span><i class="fa fa-calendar-check-o"></i></span>
+                          <span class="task-text">今天</span>
+                      </div>
+                      <div class="future-task">
+                          <span><i class="fa fa-calendar"></i></span>
+                          <span class="task-text">未来7天</span>
+                      </div>
+                  </div>
+                  <div class="tags-manager">
+                      <div class="project">
+                          <span class="project-add"><i class="fa fa-plus" id="project-new"></i></span>
+                          <a href="#page_detail" data-toggle="collapse" aria-expanded="false">清单</a>
+                          <ul class="collapse" id="page_detail">
+                              <li>
+                                  <div class="single-project">
+                                      <span class="circle"></span>
+                                      <span class="text">个人</span>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="single-project">
+                                      <span class="circle color-red"></span>
+                                      <span class="text">购物</span>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="single-project">
+                                      <span class="circle color-blue"></span>
+                                      <span class="text">工作</span>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="single-project">
+                                      <span class="circle color-cyan"></span>
+                                      <span class="text">杂项</span>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                      <div class="tags">
+                          <span class="tag-add"><i class="fa fa-plus" id="tags-new"></i></span>
+                          <a href="#tag_detail" data-toggle="collapse" aria-expanded="false">标签</a>
+                          <ul class="collapse" id="tag_detail">
+                          </ul>
+                      </div>
+                      <div class="filter">
+                          <a href="#filter_detail" data-toggle="collapse" aria-expanded="false">过滤</a>
+                          <ul class="collapse" id="filter_detail">
+                              <li>
+                                  <div class="single-project">
+                                      <span class="fa fa-tint tint-red"></span>
+                                      <span class="text">优先级1</span>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="single-project">
+                                      <span class="fa fa-tint tint-blue"></span>
+                                      <span class="text">优先级2</span>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="single-project">
+                                      <span class="fa fa-tint tint-yellow"></span>
+                                      <span class="text">优先级3</span>
+                                  </div>
+                              </li>
+                              <li>
+                                  <div class="single-project">
+                                      <span class="fa fa-tint tint-orange"></span>
+                                      <span class="text">优先级4</span>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="content">
+          <div class="main-content scrolllable">
+              <div class="page-slide">
+                  <div class="theme-slide">
+                      <ul id="list_theme">
+                          <li class="active"><img src="{% static 'img/theme/theme1.png' %}" class="theme-img"></li>
+                          <li><img src="{% static 'img/theme/theme2.png' %}" class="theme-img"></li>
+                          <li><img src="{% static 'img/theme/theme3.png' %}" class="theme-img"></li>
+                          <li><img src="{% static 'img/theme/theme4.png' %}" class="theme-img"></li>
+                      </ul>
+                  </div>
+                  <div class="circle-nav">
+                      <ul>
+                          <li><span class="theme-circle color-cyan active"></span></li>
+                          <li><span class="theme-circle color-blue"></span></li>
+                          <li><span class="theme-circle color-red"></span></li>
+                          <li><span class="theme-circle"></span></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="editor">
+                  <div class="edit-header">
+                      <a href="#" class="edit-today">今天</a>
+                      <span>星期六 5月12日</span>
+                  </div>
+                  <div class="edit-area">
+                      <div class="area-wrapper">
+                          <div class="edit-task-tag"></div>
+                          <div class="edit-wrapper">
+                              <input id="taskInput" type="text" class="edit-input" placeholder="每天读书p3 @目标#个人" ng-model="task_text">
+                          </div>
+                      </div>
+                      <div class="input-group date" data-provide="datepicker">
+                          <input type="text" class="form-control">     
+                          <span class="glyphicon glyphicon-calendar input-group-addon"></span>
+                      </div>   
+                  </div>
+                  <div class="task-info">
+                      <div class="task-icon float-right">
+                          <span data-toggle="tooltip" title="项目"><i class="fa fa-book"></i></span>
+                          <span data-toggle="tooltip" title="提醒"><i class="fa fa-clock-o"></i></span>
+                          <span data-toggle="tooltip" title="优先级"><i class="fa fa-flag"></i></span>
+                      </div>
+                      <div class="task-submit">
+                          <a href="#" class="add-btn" ng-click="postTask()"><span>添加任务</span></a>
+                          <a href="#" class="task-cancel">取消</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="timeline-title">
+                  <a href="#">清单时间线</a>
+              </div>
+              <div class="timeline">
+                  <div class="timeline-wrapper">
+                      <div ng-repeat="task in tasks">
+                          <div class="task-wrapper">
+                              <div class="count-down float-right clock">
+                              </div>
+                              <div class="simple-task">
+                                  <div class="task-time">
+                                      <span class="circle float-left"></span>
+                                      <span class="real-time">2018-11-17 10:00</span>
+                                  </div>
+                                  <div class="task-info">
+                                      <div class="task-circle float-left">
+                                          <span></span>
+                                      </div>
+                                      <div class="task-content">
+                                          <p class="content-text">尽快完成项目作业</p>
+                                          <div class="detail-info">
+                                              <span class="remind-time"><i class="fa fa-bell"></i>2018-05-15 21:55</span>
+                                              <span><i class="fa fa-edit" id="{{ task.id }}" ng-click="editTask($event)"></i></span>
+                                          </div>
+                                          <div class="detail-tags">
+                                              <span><i class="fa fa-bookmark"></i></span>
+                                              <span class="tag">美食</span>
+                                              <span class="tag">电影</span>
+                                          </div>
+                                          <div class="detail-projects">
+                                              <span class="project"><i class="fa fa-tasks"></i>个人</span>
+                                              <span class="project"><i class="fa fa-tasks"></i>购物</span>
+                                              <span class="project"><i class="fa fa-tasks"></i>工作</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="task-end">
+                          <span class="circle float-left"></span>
+                          <span class="real-time">已加载全部待完成内容</span>
+                      </div>
+                  </div>
+                  <div class="timeline-wrapper">
+                      <div ng-repeat="ftask in finishedTasks">
+                          <div class="task-wrapper">
+                              <div class="count-down float-right">
+                                  <canvas></canvas>
+                              </div>
+                              <div class="simple-task">
+                                  <div class="task-time">
+                                      <span class="circle float-left"></span>
+                                      <span class="real-time">2018-11-17 10:00</span>
+                                  </div>
+                                  <div class="task-info">
+                                      <div class="task-circle float-left">
+                                          <span></span>
+                                      </div>
+                                      <div class="task-content">
+                                          <p class="content-text">努力学习，完成项目作业</p>
+                                          <div class="detail-info">
+                                              <span class="remind-time"><i class="fa fa-bell"></i>2018-11-17 10:00</span>
+                                              <span><i  class="fa fa-edit" id="{{ ftask.id }}"></i></span>
+                                          </div>
+                                          <div class="detail-tags">
+                                              <span><i class="fa fa-bookmark"></i></span>
+                                              <span class="tag">美食</span>
+                                              <span class="tag">电影</span>
+                                          </div>
+                                          <div class="detail-projects">
+                                              <span class="project"><i class="fa fa-tasks"></i>个人</span>
+                                              <span class="project"><i class="fa fa-tasks"></i>购物</span>
+                                              <span class="project"><i class="fa fa-tasks"></i>工作</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="task-end">
+                          <span class="circle float-left"></span>
+                          <span class="real-time">已加载完成内容</span>
+                      </div>
+                  </div>
+              </div>
+              </div>
+      </div>
+          </div>
+      </div> 
+  </div>
+</div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+  <script>
+    $('.datepicker').datepicker({
+      format: 'mm/dd/yyyy',
+      startDate: '-3d'
+    });
+  </script>
+  <script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>
