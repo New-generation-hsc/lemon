@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>lemonlist</title>
+  <link rel="stylesheet" href="{% static 'lib/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <body>
+      <div class="row">
+          <div class="column window">
+            <div class="header">
+              <div class="header-bar">
+                  <div class="circle-flag">
+                      <span class="circle circle-red"></span>
+                      <span class="circle circle-yellow"></span>
+                      <span class="circle circle-green"></span>
+                  </div>
+                  <div class="header-title">
+                        <p>~/lemonlist/~</p>
+                    </div>
+              </div>
+              <div class="avatar">
+                  <img src="{% static 'img/img_avatar.png' %}" alt="avatar">
+                  <div class="outline"></div>
+              </div>
+            </div>
+            <div class="form-input">
+                <form action="" method="POST" novalidate>
+                    {% csrf_token %}
+                    <div class="user-input wrapper">
+                        <span><i class="fa fa-user-o"></i></span>
+                        <input type="text" name="username" id="username" placeholder="用户名" required autofocus>
+                        <span class="right"><i class="fa fa-check-circle-o"></i></span>
+                    </div>
+                    <div class="password-input wrapper">
+                        <span><i class="fa fa-lock"></i></span>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+                    <div class="submit-btn">
+                        <input type="submit" value="登录" name="submit">
+                    </div>
+                </form>
+            </div>
+            <div class="separator">
+                <span></span>
+                <span>没有账户</span>
+                <span></span>
+            </div>
+            <div class="create">
+                <a href="{% url 'registe' %}">创建免费账户</a>
+            </div>
+          </div>
+      </div>
+  </body>
+</head>
+</html>

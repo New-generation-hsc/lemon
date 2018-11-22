@@ -1,0 +1,249 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/** ---------------- login window ------------- */
+
+.row {
+    width: 450px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.window {
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-shadow: 0px 2px 3px 0px rgba(50, 50, 50, 0.11);
+    animation: zoom 500ms;
+    -webkit-animation: zoom 500ms;
+}
+
+/** ----------------------- header bar ------------------------*/
+
+.header {
+    height: 120px;
+    width: 100%;
+    background-image: url("../img/lime.jpg");
+    border-radius: 4px;
+    border-bottom: 1px solid #c3c3c3;
+    position: relative;
+}
+
+.header-bar {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-bar .header-title{
+    flex: 1;
+    text-align: center;
+    font: 11px "Myriad Pro", "Arial";
+    color: #766f79;
+}
+
+.circle {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 100%;
+}
+
+.circle-red {
+    background: #df7065;
+}
+
+.circle-green {
+    background: #5bcc8b;
+}
+
+.circle-yellow {
+    background: #e6bb46;
+}
+
+.header-bar span{
+    margin: 11px 2px;
+}
+
+.header-bar span:first-child {
+    margin-left: 5px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    margin: 0;
+}
+
+.avatar {
+    position: absolute;
+    bottom: -40px;
+    left: calc(100%/2 - 40px);
+    border-radius: 100%;
+    height: 80px;
+    width: 80px;
+    border: 3px solid #c3c3c3;
+}
+
+.outline {
+    position: absolute;
+    height: calc(100% + 12px);
+    width: calc(100% + 12px);
+    border: 3px solid red;
+    border-radius: 100%;
+    left: -9px;
+    top: -9px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
+/** ---------------- form input ----------------- */
+
+.wrapper {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 1px;
+    transition: border-color ease-in-out 0.15s;
+    margin-bottom: 28px;
+    position: relative;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+.form-input form {
+    margin-top: 60px;
+}
+
+.wrapper input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 10px 10px 8px 8px;
+    width: calc(100% - 70px);
+}
+
+input::-moz-placeholder {
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+	color: rgba(204, 204, 204, 0.8) !important;
+}
+
+input::-webkit-input-placeholder {
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+	color: rgba(204, 204, 204, 0.8) !important;
+}
+
+.wrapper:first-child input {
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+}
+
+.form-input input + span {
+    opacity: 0;
+}
+
+input[type="email"]:valid + span {
+    color: #5bcc8b;
+    opacity: 1;
+    border: none;
+}
+
+.submit-btn {
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 2px;
+    height: 36px;
+    background: #617fde;
+}
+
+.submit-btn a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+    padding-top: 6px;
+}
+
+.submit-btn input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+}
+
+.submit-btn input:hover {
+    cursor: pointer;
+}
+
+/** --------------- separator -------------- */
+
+.separator {
+    margin: 20px 10%;
+    display: flex;
+    flex-direction: row;
+}
+
+.separator span {
+    flex: 1;
+}
+
+.separator span:first-child, span:nth-child(3){
+    border-bottom: 1px solid rgba(204, 204, 204, 0.8);
+    margin-bottom: 12px;
+}
+
+.separator span:nth-child(2) {
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    color: #c3c3c3;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.create {
+    margin: 0 10%;
+    margin-bottom: 20px;
+}
+
+.create a {
+    display: block;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    color: #617fde;
+    text-align: center;
+}
