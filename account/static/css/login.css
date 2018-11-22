@@ -172,7 +172,7 @@ input::-webkit-input-placeholder {
     opacity: 0;
 }
 
-input[type="email"]:valid + span {
+input:valid + span {
     color: #5bcc8b;
     opacity: 1;
     border: none;
