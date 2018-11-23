@@ -1,0 +1,284 @@
+/** -------------------- new task ----------------------- */
+
+.new-task {
+	height: 96%;
+	border: 1px solid #ccc;
+	width: 400px;
+	border-radius: 5px;
+	box-shadow: 0px 2px 3px 0px rgba(50, 50, 50, 0.11);
+	padding: 10px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: absolute;
+	z-index: 66;
+	background-color: rgba(255, 255, 255, 0.90);
+	top: 10px;
+	right: -450px;
+}
+
+/** -------------------- new task header ------------- */
+
+.new-task .header {
+	display: flex;
+	flex-direction: row;
+	background-color: transparent;
+}
+
+.new-task .header span {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	border-radius: 100%;
+	margin-right: 4px;
+}
+
+.new-task .header .header-title {
+	flex: 1;
+}
+
+.new-task .header .header-title p {
+	margin-left: 100px;
+	font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+	font-size: 14px;
+	color: #766f79;
+}
+
+.circle-red {
+    background: #df7065;
+}
+
+.circle-green {
+    background: #5bcc8b;
+}
+
+.circle-yellow {
+    background: #e6bb46;
+}
+
+/** ------------ rich text editor --------------------- */
+
+.richtext_editor {
+	font-size: 14px;
+	min-height: 21px;
+	outline: none;
+	padding: 6px 10px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin-bottom: 20px;
+}
+
+[contentEditable=true]:empty:not(:focus)::before{
+	content:attr(placeholder);
+	color: rgba(204, 204, 204, 0.8) !important;
+}
+
+/** ------------- date ---------- */
+div.date input::placeholder {
+	color: rgba(204, 204, 204, 0.8) !important;
+}
+
+div.date {
+	margin-bottom: 20px;
+}
+
+/** ------------ tags selector --------------- */
+
+.new-task a {
+	text-decoration: none;
+	display: block;
+	color: #333;
+	font-size: 14px;
+	line-height: 1.25;
+	padding: 12.5px 0 12.5px 20px;
+	border-bottom: 1px solid #c6c6cc;
+}
+
+/* a[data-toggle="collapse"] {
+	position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\e259';
+    display: block;
+    position: absolute;
+    left: 0px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+}
+
+a[aria-expanded="true"]::before {
+    content: '\e260';
+} */
+
+.new-task .selections {
+	margin: 10px 0 0 10px;
+}
+
+.control {
+	font-size: 14px;
+	position: relative;
+	display: block;
+	margin-bottom: 10px;
+	padding-left: 30px;
+	cursor: pointer;
+	color: #333;
+	font-weight: normal;
+}
+
+.control input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.control__indicator {
+	position: absolute;
+	top: 2px;
+	left: 0;
+	width: 18px;
+	height: 18px;
+	/* background: #e6e6e6; */
+	border: 1px solid #e6e6e6;
+}
+
+.control--radio .control__indicator {
+	border-radius: 50%;
+}
+
+/* Hover and focus states */
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+	/* background: #ccc; */
+	border-color: #ccc;
+}
+
+/* Checked state */
+.control input[type="checkbox"]:checked ~ .control__indicator {
+	/* background: #2aa1c0; */
+	border: none;
+}
+
+/* Hover state whilst checked
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+	background: #0e647d;
+} */
+
+/* Check mark */
+.control__indicator:after {
+	position: absolute;
+	display: none;
+	content: '';
+}
+
+/* Show check mark */
+.control input:checked ~ .control__indicator:after {
+	display: block;
+}
+
+/* Checkbox tick */
+.control--checkbox .control__indicator:after {
+	top: 2px;
+	left: 6px;
+	width: 5px;
+	height: 9px;
+	transform: rotate(45deg);
+	border: solid #2aa1c0;
+	border-width: 0 2px 2px 0;
+}
+
+/* Radio button inner circle */
+.control--radio .control__indicator:after {
+	top: 5px;
+	left: 5px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #2aa1c0;
+}
+
+/** ------------------ footer ---------- */
+
+.new-task .empty-state {
+	width: 220px;
+	height: 220px;
+}
+
+.new-task .row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.new-task .column {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.new-task button {
+	display: block;
+	font-size: 13px;
+	line-height: 17px;
+	margin: 0 auto;
+	margin-top: 20px;
+	padding: 6px 12px 7px 12px;
+	text-decoration: none;
+	background-color: #3d3d3d;
+	border: solid 1px transparent;
+	border-radius: 3px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.footer p {
+	color: #777;
+	font-size: 14px;
+}
+
+.footer .ctr-btn {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+/** -------------- task plus ----------- */
+
+#task_plus {
+	position: absolute;
+	bottom: 50px;
+	right: 50px;
+	z-index: 10;
+	width: 45px;
+	height: 45px;
+	background-color: #3d3d3d;
+	border-radius: 100%;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	box-shadow: 0px 2px 3px 0px rgba(50, 50, 50, 0.11);
+}
+
+#task_plus:after {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 18px;
+	height: 18px;
+	border: solid #fff;
+	border-width: 4px 0 0 4px;
+	top: 20px;
+	left: 20px;
+}
+
+#task_plus:before {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 18px;
+	height: 18px;
+	border: solid #fff;
+	border-width: 0 4px 4px 0;
+	top: 6px;
+	left: 6px;
+}
