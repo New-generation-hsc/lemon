@@ -11,8 +11,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
   <!-- jQuery library -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/task.css' %}">
 </head>
 <body>
+  {% include 'task.html' %}
   <div class="dialog-bg" id="background"></div>
   <div class="dialog-row" id="dialog_projects">
       <div class="newproject-dialog">
@@ -24,14 +26,17 @@
             {% csrf_token %}
           <div class="project-input">
             <span><i class="fa fa-hand-o-right"></i></span>
-              <input type="text" placeholder="清单名称" id="project_content" name="name">
+              <input type="text" placeholder="清单名称" id="project_content" name="name" autocomplete="off">
           </div>
           <div class="projects">
-              <span><i class="fa fa-tasks"></i>学习</span>
+<!--          <span><i class="fa fa-tasks"></i>学习</span>
               <span><i class="fa fa-tasks"></i>旅游</span>
               <span><i class="fa fa-tasks"></i>工作</span>
               <span><i class="fa fa-tasks"></i>电影</span>
-              <span><i class="fa fa-tasks"></i>生活</span>
+              <span><i class="fa fa-tasks"></i>生活</span>-->  
+            {% for project in projects %}
+              <span><i class="fa fa-tasks"></i>{{ project.name }}</span>
+            {% endfor %}
           </div>
           <div class="separator">
               <span></span>
@@ -78,14 +83,17 @@
             {% csrf_token %}
           <div class="project-input">
             <span><i class="fa fa-hand-o-right"></i></span>
-              <input type="text" placeholder="标签名称" name="name">
+              <input type="text" placeholder="标签名称" name="name" autocomplete="off">
           </div>
           <div class="all-tags">
-            <span>北京</span>
+            <!--<span>北京</span>
             <span>算法</span>
             <span>编程</span>
             <span>电影</span>
-            <span>生活</span>
+            <span>生活</span>-->
+            {% for tag in tags %}
+            <span>{{ tag.name }}</span>
+            {% endfor %}
           </div>
           <div class="separator">
             <span></span>
@@ -182,36 +190,28 @@
                           <span class="project-add"><i class="fa fa-plus" id="project-new"></i></span>
                           <a href="#page_detail" data-toggle="collapse" aria-expanded="false">清单</a>
                           <ul class="collapse" id="page_detail">
+                              {% for project in projects %}
                               <li>
                                   <div class="single-project">
-                                      <span class="circle"></span>
-                                      <span class="text">个人</span>
+                                      <span class="circle color{{ project.color }}"></span>
+                                      <span class="text">{{ project.name }}</span>
                                   </div>
                               </li>
-                              <li>
-                                  <div class="single-project">
-                                      <span class="circle color-red"></span>
-                                      <span class="text">购物</span>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div class="single-project">
-                                      <span class="circle color-blue"></span>
-                                      <span class="text">工作</span>
-                                  </div>
-                              </li>
-                              <li>
-                                  <div class="single-project">
-                                      <span class="circle color-cyan"></span>
-                                      <span class="text">杂项</span>
-                                  </div>
-                              </li>
+                              {% endfor %}
                           </ul>
                       </div>
                       <div class="tags">
                           <span class="tag-add"><i class="fa fa-plus" id="tags-new"></i></span>
                           <a href="#tag_detail" data-toggle="collapse" aria-expanded="false">标签</a>
                           <ul class="collapse" id="tag_detail">
+                            {% for tag in tags %}
+                            <li>
+                                <div class="single-tag">
+                                    <span class="circle color{{ tag.color }}"></span>
+                                    <span class="text">{{ tag.name }}</span>
+                                </div>
+                            </li>
+                            {% endfor %}
                           </ul>
                       </div>
                       <div class="filter">
@@ -271,29 +271,6 @@
                   <div class="edit-header">
                       <a href="#" class="edit-today">今天</a>
                       <span>星期六 5月12日</span>
-                  </div>
-                  <div class="edit-area">
-                      <div class="area-wrapper">
-                          <div class="edit-task-tag"></div>
-                          <div class="edit-wrapper">
-                              <input id="taskInput" type="text" class="edit-input" placeholder="每天读书p3 @目标#个人" ng-model="task_text">
-                          </div>
-                      </div>
-                      <div class="input-group date" data-provide="datepicker">
-                          <input type="text" class="form-control">     
-                          <span class="glyphicon glyphicon-calendar input-group-addon"></span>
-                      </div>   
-                  </div>
-                  <div class="task-info">
-                      <div class="task-icon float-right">
-                          <span data-toggle="tooltip" title="项目"><i class="fa fa-book"></i></span>
-                          <span data-toggle="tooltip" title="提醒"><i class="fa fa-clock-o"></i></span>
-                          <span data-toggle="tooltip" title="优先级"><i class="fa fa-flag"></i></span>
-                      </div>
-                      <div class="task-submit">
-                          <a href="#" class="add-btn" ng-click="postTask()"><span>添加任务</span></a>
-                          <a href="#" class="task-cancel">取消</a>
-                      </div>
                   </div>
               </div>
               <div class="timeline-title">
@@ -398,5 +375,6 @@
     });
   </script>
   <script src="{% static 'js/home.js' %}"></script>
+  <script src="{% static 'js/task.js' %}"></script>
 </body>
 </html>

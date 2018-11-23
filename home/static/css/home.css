@@ -3,6 +3,7 @@ html, body{
 	width: 100%;
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
 }
 
 .main-body {
@@ -788,7 +789,8 @@ input.edit-input::-webkit-input-placeholder {
     border: none;
     outline: none;
     padding: 10px 10px 8px 8px;
-    width: calc(100% - 70px);
+	width: calc(100% - 70px);
+	background-color: transparent;
 }
 
 /** ------------ projects --------------------------- */
