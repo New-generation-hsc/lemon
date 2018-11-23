@@ -278,47 +278,48 @@
               </div>
               <div class="timeline">
                   <div class="timeline-wrapper">
-                      <div ng-repeat="task in tasks">
+                    {% for task in tasks %}
+                      <div>  
                           <div class="task-wrapper">
-                              <div class="count-down float-right clock">
-                              </div>
                               <div class="simple-task">
                                   <div class="task-time">
                                       <span class="circle float-left"></span>
-                                      <span class="real-time">2018-11-17 10:00</span>
+                                      <span class="real-time">{{ task.create_date | date:'Y-m-d' }}</span>
                                   </div>
                                   <div class="task-info">
                                       <div class="task-circle float-left">
                                           <span></span>
                                       </div>
                                       <div class="task-content">
-                                          <p class="content-text">尽快完成项目作业</p>
+                                          <p class="content-text">{{ task.content }}</p>
                                           <div class="detail-info">
-                                              <span class="remind-time"><i class="fa fa-bell"></i>2018-05-15 21:55</span>
-                                              <span><i class="fa fa-edit" id="{{ task.id }}" ng-click="editTask($event)"></i></span>
+                                              <span class="remind-time"><i class="fa fa-bell"></i>{{ task.remind_time }}</span>
+                                              <span><i class="fa fa-edit task-edit" value="{{ task.pk }}"></i></span>
                                           </div>
                                           <div class="detail-tags">
                                               <span><i class="fa fa-bookmark"></i></span>
-                                              <span class="tag">美食</span>
-                                              <span class="tag">电影</span>
+                                              <span class="tag">{{ task.category }}</span>
                                           </div>
                                           <div class="detail-projects">
-                                              <span class="project"><i class="fa fa-tasks"></i>个人</span>
-                                              <span class="project"><i class="fa fa-tasks"></i>购物</span>
-                                              <span class="project"><i class="fa fa-tasks"></i>工作</span>
+                                              {% for tag in task.tags.all %}
+                                              <span class="project"><i class="fa fa-tasks"></i>{{ tag.name }}</span>
+                                              {% endfor %}
                                           </div>
                                       </div>
                                   </div>
                               </div>
                           </div>
+                          
                       </div>
+                      {% endfor %}
                       <div class="task-end">
                           <span class="circle float-left"></span>
                           <span class="real-time">已加载全部待完成内容</span>
                       </div>
                   </div>
                   <div class="timeline-wrapper">
-                      <div ng-repeat="ftask in finishedTasks">
+                      {% for task in finished_tasks %}
+                      <div>
                           <div class="task-wrapper">
                               <div class="count-down float-right">
                                   <canvas></canvas>
@@ -326,33 +327,33 @@
                               <div class="simple-task">
                                   <div class="task-time">
                                       <span class="circle float-left"></span>
-                                      <span class="real-time">2018-11-17 10:00</span>
+                                      <span class="real-time">{{ task.create_date | date:'Y-m-d' }}</span>
                                   </div>
                                   <div class="task-info">
                                       <div class="task-circle float-left">
                                           <span></span>
                                       </div>
                                       <div class="task-content">
-                                          <p class="content-text">努力学习，完成项目作业</p>
+                                          <p class="content-text">{{ task.content }}</p>
                                           <div class="detail-info">
-                                              <span class="remind-time"><i class="fa fa-bell"></i>2018-11-17 10:00</span>
-                                              <span><i  class="fa fa-edit" id="{{ ftask.id }}"></i></span>
+                                              <span class="remind-time"><i class="fa fa-bell"></i>{{ task.remind_time }}</span>
+                                              <span><i  class="fa fa-edit task-edit" value="{{ task.pk }}"></i></span>
                                           </div>
                                           <div class="detail-tags">
                                               <span><i class="fa fa-bookmark"></i></span>
-                                              <span class="tag">美食</span>
-                                              <span class="tag">电影</span>
+                                              <span class="tag">{{ task.category }}</span>
                                           </div>
                                           <div class="detail-projects">
-                                              <span class="project"><i class="fa fa-tasks"></i>个人</span>
-                                              <span class="project"><i class="fa fa-tasks"></i>购物</span>
-                                              <span class="project"><i class="fa fa-tasks"></i>工作</span>
+                                                {% for tag in task.tags.all %}
+                                                <span class="project"><i class="fa fa-tasks"></i>{{ tag.name }}</span>
+                                                {% endfor %}
                                           </div>
                                       </div>
                                   </div>
                               </div>
                           </div>
                       </div>
+                      {% endfor %}
                       <div class="task-end">
                           <span class="circle float-left"></span>
                           <span class="real-time">已加载完成内容</span>

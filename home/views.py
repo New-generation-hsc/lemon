@@ -1,16 +1,21 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Category, Tag
-from .forms import ValidateFrom
+from django.http import JsonResponse
+from .models import Category, Tag, Task
+from .forms import ValidateFrom, TaskForm
 
 # Create your views here.
 @login_required(login_url='/account/login')
 def index(request):
     projects = Category.objects.filter(owner=request.user)
     tags = Tag.objects.filter(owner=request.user)
+    tasks = Task.objects.filter(owner=request.user, finished=False)
+    finished_tasks = Task.objects.filter(owner=request.user, finished=True)
     context = {
         'projects' : projects,
-        'tags' : tags
+        'tags' : tags,
+        'tasks' : tasks,
+        'finished_tasks' : finished_tasks
     }
     return render(request, 'home.html', context=context)
 
@@ -39,5 +44,32 @@ def create_tag(request):
 @login_required(login_url='/account/login')
 def create_task(request):
     if request.method == "POST":
-        print(request.POST)
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            task = Task(content=data['content'], remind_time=data['remind_time'])
+            task.owner = request.user
+            pk = int(request.POST.get('radio', '0'))
+            category = Category.objects.get(pk=pk)
+            task.category = category
+            task.save()
+            for key in request.POST:
+                if key.startswith('check'):
+                    pk = int(request.POST[key])
+                    tag = Tag.objects.get(pk=pk)
+                    task.tags.add(tag)
+        return JsonResponse({'msg': '创建任务成功'})
+    return redirect('/')
+
+
+@login_required(login_url='/account/login')
+def update_task(request):
+    if request.method == "POST":
+        pk = request.POST.get('pk', '')
+        if pk:
+            task = Task.objects.get(pk=pk)
+            task.finished = not task.finished
+            task.save()
+            print("update succ")
+            return JsonResponse({"msg" : "更新任务成功"})
     return redirect('/')

@@ -30,4 +30,36 @@
             }
         });
     });
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    $(".task-edit").click(function(){
+        $target = $(this);
+        context = {
+            'pk' : $target.attr("value"),
+            'csrfmiddlewaretoken' :  getCookie('csrftoken')
+        };
+        $.ajax({
+            type: "POST",
+            url: 'update',
+            data : context,
+            success : function(response){
+                window.location.href = '/';
+            }
+        });
+    });
 }(jQuery));

@@ -41,7 +41,7 @@ class Task(models.Model):
     create_date = models.DateTimeField(default=timezone.now)
     remind_time = models.DateField()
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.SET_NULL)
     tags = models.ManyToManyField('Tag')
     finished = models.BooleanField(default=False)
 
