@@ -12,8 +12,10 @@
   <!-- jQuery library -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/task.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/msg.css' %}">
 </head>
 <body>
+  {% include 'msg.html' %}
   {% include 'task.html' %}
   <div class="dialog-bg" id="background"></div>
   <div class="dialog-row" id="dialog_projects">
@@ -22,7 +24,7 @@
               <span>创建任务清单</span>
               <span><i class="fa fa-close close-btn"></i></span>
           </div>
-          <form action="project" method="POST">
+          <form action="project" method="POST" id="newproject_form">
             {% csrf_token %}
           <div class="project-input">
             <span><i class="fa fa-hand-o-right"></i></span>
@@ -79,7 +81,7 @@
               <span>创建任务标签</span>
               <span><i class="fa fa-close tag-close"></i></span>
           </div>
-          <form action="newtag" method="POST">
+          <form action="newtag" method="POST" id="newtag_form">
             {% csrf_token %}
           <div class="project-input">
             <span><i class="fa fa-hand-o-right"></i></span>
@@ -377,5 +379,6 @@
   </script>
   <script src="{% static 'js/home.js' %}"></script>
   <script src="{% static 'js/task.js' %}"></script>
+  <script src="{% static 'js/msg.js' %}"></script>
 </body>
 </html>

@@ -26,7 +26,7 @@
             url: $form.attr('action'),
             data : context,
             success : function(response){
-                window.location.href = '/';
+                window.location.href = '/?msg='+response['msg'];
             }
         });
     });
@@ -57,8 +57,46 @@
             type: "POST",
             url: 'update',
             data : context,
+            success : function(response){ 
+                window.location.href = '/?msg='+response['msg'];
+            }
+        });
+    });
+
+    /** add a new project submit */
+    $("#newproject_form").submit(function(event){
+        event.preventDefault();
+        var $form = $(this);
+        var context = {};
+        $form.serializeArray().forEach(element => {
+            context[element['name']] = element['value'];
+        });
+
+        $.ajax({
+            type: "POST",
+            url: $form.attr('action'),
+            data : context,
             success : function(response){
-                window.location.href = '/';
+                window.location.href = '/?msg='+response['msg'];
+            }
+        });
+    });
+
+    /** add a new tag submit */
+    $("#newtag_form").submit(function(event){
+        event.preventDefault();
+        var $form = $(this);
+        var context = {};
+        $form.serializeArray().forEach(element => {
+            context[element['name']] = element['value'];
+        });
+
+        $.ajax({
+            type: "POST",
+            url: $form.attr('action'),
+            data : context,
+            success : function(response){
+                window.location.href = '/?msg='+response['msg'];
             }
         });
     });

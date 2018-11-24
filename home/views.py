@@ -27,6 +27,8 @@ def project(request):
         form = ValidateFrom(request.POST, user=request.user, model=Category)
         if form.is_valid():
             Category.objects.create_category(request, name, color)
+            return JsonResponse({'msg' : "创建清单" + name + "成功"})
+        return JsonResponse({'msg' : "创建清单" + name + "失败"})
     return redirect('/')
 
 @login_required(login_url='/account/loign')
@@ -37,7 +39,8 @@ def create_tag(request):
         form = ValidateFrom(request.POST, user=request.user, model=Tag)
         if form.is_valid():
             Tag.objects.create_tag(request, name, color)
-            print("create tag succ", name, color)
+            return JsonResponse({'msg' : "创建标签" + name + "成功"})
+        return JsonResponse({'msg' : "创建标签" + name + "失败"})
     return redirect('/')
 
 
@@ -58,7 +61,8 @@ def create_task(request):
                     pk = int(request.POST[key])
                     tag = Tag.objects.get(pk=pk)
                     task.tags.add(tag)
-        return JsonResponse({'msg': '创建任务成功'})
+            return JsonResponse({'msg': '创建任务成功'})
+        return JsonResponse({'msg' : '创建任务失败'})
     return redirect('/')
 
 
@@ -72,4 +76,5 @@ def update_task(request):
             task.save()
             print("update succ")
             return JsonResponse({"msg" : "更新任务成功"})
+        return JsonResponse({'msg' : "更新任务失败"})
     return redirect('/')
