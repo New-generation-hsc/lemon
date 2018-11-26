@@ -74,7 +74,50 @@ def update_task(request):
             task = Task.objects.get(pk=pk)
             task.finished = not task.finished
             task.save()
-            print("update succ")
             return JsonResponse({"msg" : "更新任务成功"})
         return JsonResponse({'msg' : "更新任务失败"})
     return redirect('/')
+
+
+@login_required(login_url='/account/login')
+def update_content(request):
+    if request.method == "POST":
+        pk = request.POST.get('pk', '')
+        if pk:
+            task = Task.objects.get(pk=pk)
+            task.content = request.POST.get('content', '')
+            task.save()
+            return JsonResponse({"msg" : "更新任务内容成功"})
+        return JsonResponse({'msg' : "更新任务失败"})
+    return redirect('/')
+
+@login_required(login_url='/account/login')
+def retrive_project(request, project):
+    p = Category.objects.filter(owner=request.user, name=project).first()
+    projects = Category.objects.filter(owner=request.user)
+    tags = Tag.objects.filter(owner=request.user)
+    tasks = Task.objects.filter(owner=request.user, finished=False, category=p)
+    finished_tasks = Task.objects.filter(owner=request.user, finished=True, category=p)
+    context = {
+        'projects' : projects,
+        'tags' : tags,
+        'tasks' : tasks,
+        'finished_tasks' : finished_tasks
+    }
+    return render(request, 'home.html', context=context)
+
+
+@login_required(login_url='/account/login')
+def retrive_tag(request, tag):
+    t = Tag.objects.filter(owner=request.user, name=tag).first()
+    projects = Category.objects.filter(owner=request.user)
+    tags = Tag.objects.filter(owner=request.user)
+    tasks = t.task_set.filter(finished=False)
+    finished_tasks = t.task_set.filter(finished=True)
+    context = {
+        'projects' : projects,
+        'tags' : tags,
+        'tasks' : tasks,
+        'finished_tasks' : finished_tasks
+    }
+    return render(request, 'home.html', context=context)

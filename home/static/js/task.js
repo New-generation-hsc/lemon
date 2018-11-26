@@ -3,8 +3,13 @@
         $("#new_task_window").animate({right : "0"}, 1000);
     });
 
-    $("#cancle_window").click(function(){
+    $("#cancel_window").click(function(){
         $("#new_task_window").animate({right : "-450px"}, 1000);
+    });
+
+    $(".edit").dblclick(function(){
+        $element = $(this);
+        $element.attr("contenteditable", "true");
     });
 
     $("#newtask_form").submit(function(event){
@@ -55,7 +60,7 @@
         };
         $.ajax({
             type: "POST",
-            url: 'update',
+            url: 'update/finish',
             data : context,
             success : function(response){ 
                 window.location.href = '/?msg='+response['msg'];
@@ -99,5 +104,28 @@
                 window.location.href = '/?msg='+response['msg'];
             }
         });
+    });
+
+    $(".update_btn").click(function(event){
+        event.preventDefault();
+        var $btn = $(this);
+        var $content = $btn.prev();
+        $content.removeAttr("contenteditable");
+
+        var context = {
+            'content' : $content.text(),
+            'pk' : $content.attr("id"),
+            'csrfmiddlewaretoken' :  getCookie('csrftoken')
+        };
+
+        $.ajax({
+            type: "POST",
+            url: 'update/content',
+            data : context,
+            success : function(response){
+                window.location.href = '/?msg='+response['msg'];
+            }
+        });
+
     });
 }(jQuery));

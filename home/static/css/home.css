@@ -496,128 +496,185 @@ input.edit-input::-webkit-input-placeholder {
 	line-height: 1.5;
 }
 
+.timeline {
+    padding-left: 68px;
+}
+
 .timeline-wrapper {
-	margin-left: 68px;
-	height: 100%;
-	border-left: 1px solid rgba(195, 195, 195, 0.5);
+    border-left: 1px solid rgba(195, 195, 195, 0.5);
 }
 
-.simple-task {
-	height: 180px;
+.tasks {
+    padding-top: 10px;
 }
 
-.simple-task .task-time {
-	padding-top: 10px;
-}
-
-.simple-task .task-time .circle {
-	margin-left: -6px;
-	padding: 0;
-	margin-top: 8px;
-}
-
-.simple-task .task-time .real-time{
-	display: inline-block;
-	padding-top: 5px;
-	color: #999;
-	margin-left: 10px;
-}
-
-.task-info {
-	margin-top: 10px;
+.task-wrapper {
+	padding-bottom: 20px;
 }
 
 .task-circle {
-	padding: 0;
-	margin-left: -10px;
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 100%;
+    background-color: #999;
+    margin-left: -6px;
 }
 
-.task-circle span {
-	width: 20px;
-	height: 20px;
-	display: inline-block;
+.realtime-wrapper span:nth-child(2) {
+    color: #999;
+    margin-left: 5px;
+}
+
+.task-content-wrapper {
+    position: relative;
+    margin-top: 8px;
+}
+
+.task-content-wrapper span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: block;
     border-radius: 100%;
     background-color: #fff;
-    vertical-align: middle;
     border: 2px solid #48b7e9;
+    left: -10px;
 }
 
-.task-content {
-	margin-left: 16px;
+.finished-tasks .task-content-wrapper span:after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 5px;
+    height: 9px;
+    transform: rotate(45deg);
+    border: solid #7fce47;
+    border-width: 0 2px 2px 0;
+    left: 5px;
+    top: 2px;
 }
 
-.detail-info {
-	color: #999;
-	height: auto;
+.finished-tasks .task-content-wrapper span {
+    border-color: #7fce47;
 }
 
-.detail-info span {
-	margin-right: 10px;
+.task-content-wrapper div {
+    margin-left: 20px;
+    font-size: 14px;
 }
 
-.detail-info .remind-time i{
-	margin-right: 5px;
+.task-content-wrapper button {
+    display: block;
+    font-size: 13px;
+    line-height: 17px;
+    margin-left: 20px;
+    padding: 6px 12px 7px 12px;
+    text-decoration: none;
+    background-color: #3d3d3d;
+    border: solid 1px transparent;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    display: none;
 }
 
-.detail-info span i:hover{
+.remind-time-wrapper {
+    margin-top: 8px;
+}
+
+.remind-time-wrapper span{
+    color: #999;
+}
+
+.remind-time-wrapper span{
+    margin-left: 10px;
+}
+
+.remind-time-wrapper span i {
+    margin-right: 5px;
+}
+
+.bookmark-wrapper {
+    margin-top: 8px;
+    color: #999;
+}
+
+.bookmark-wrapper span:first-child{
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.bookmark-wrapper span.tag {
+    display: inline-block;
+    padding: 2px 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #e8e8e8;
+    border-radius: 2px;
+    margin-right: 10px;
+}
+
+.bookmark-wrapper span.tag:hover {
+    background-color: #E5F8FE;
+    border-color: #95D8F5;
+}
+
+.project-wrapper {
+    margin-top: 8px;
+}
+
+.project-wrapper span {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: #383838;
+    border-radius: 4px;
+    margin-right: 10px;
+    color: white;
+}
+
+.project-wrapper span:first-child {
+    margin-left: 10px;
+}
+
+.task-end {
+    margin: 10px 0;
+    position: relative;
+}
+
+.task-end > span {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    border-radius: 100%;
+    background-color: #999;
+    left: -6px;
+    top: 2px;
+}
+
+.task-end div {
+    margin: 0 10px;
+}
+
+
+.tasks div[contenteditable=true] {
+    font-size: 14px;
+    min-height: 21px;
+    outline: none;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.tasks div[contenteditable=true] ~ button {
+    display: block;
+}
+
+.task-edit:hover{
 	cursor: pointer;
 }
 
-.detail-tags {
-	margin-top: 10px;
-}
-
-.detail-tags span {
-	display: inline-block;
-	padding-right: 10px;
-	margin-right: 5px;
-}
-
-.detail-tags span i {
-	color: #999;
-}
-
-.detail-tags .tag {
-	padding-left: 10px;
-	background-color: #f8f8f8;
-	border: 1px solid #e8e8e8;
-	border-radius: 2px;
-}
-
-.detail-tags .tag:hover {
-	background-color: #E5F8FE;
-	border-color: #95D8F5;
-}
-
-.detail-projects {
-	color: white;
-	margin-top: 10px;
-}
-
-.detail-projects span {
-	display: inline-block;
-	padding: 4px 10px;
-	background-color: #383838;
-	border-radius: 4px;
-	margin-right: 10px;
-}
-
-.detail-projects span i {
-	margin-right: 4px;
-}
-
-.task-end .circle {
-	margin-left: -6px;
-	padding: 0;
-	margin-top: 8px;
-}
-
-.task-end .real-time {
-	display: inline-block;
-	padding-top: 5px;
-	color: #999;
-	margin-left: 10px;
-}
 /** --------------------- end time line ----------------- */
 
 /** --------------------- task pop up -------------------- */

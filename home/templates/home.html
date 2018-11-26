@@ -196,7 +196,7 @@
                               <li>
                                   <div class="single-project">
                                       <span class="circle color{{ project.color }}"></span>
-                                      <span class="text">{{ project.name }}</span>
+                                      <span class="text"><a href="/project/{{project.name}}">{{ project.name }}</a></span>
                                   </div>
                               </li>
                               {% endfor %}
@@ -210,7 +210,7 @@
                             <li>
                                 <div class="single-tag">
                                     <span class="circle color{{ tag.color }}"></span>
-                                    <span class="text">{{ tag.name }}</span>
+                                    <span class="text"><a href="/tag/{{tag.name}}">{{ tag.name }}</a></span>
                                 </div>
                             </li>
                             {% endfor %}
@@ -279,88 +279,81 @@
                   <a href="#">清单时间线</a>
               </div>
               <div class="timeline">
-                  <div class="timeline-wrapper">
+                <div class="timeline-wrapper">
+                  <div class="tasks">
                     {% for task in tasks %}
-                      <div>  
-                          <div class="task-wrapper">
-                              <div class="simple-task">
-                                  <div class="task-time">
-                                      <span class="circle float-left"></span>
-                                      <span class="real-time">{{ task.create_date | date:'Y-m-d' }}</span>
-                                  </div>
-                                  <div class="task-info">
-                                      <div class="task-circle float-left">
-                                          <span></span>
-                                      </div>
-                                      <div class="task-content">
-                                          <p class="content-text">{{ task.content }}</p>
-                                          <div class="detail-info">
-                                              <span class="remind-time"><i class="fa fa-bell"></i>{{ task.remind_time }}</span>
-                                              <span><i class="fa fa-edit task-edit" value="{{ task.pk }}"></i></span>
-                                          </div>
-                                          <div class="detail-tags">
-                                              <span><i class="fa fa-bookmark"></i></span>
-                                              <span class="tag">{{ task.category }}</span>
-                                          </div>
-                                          <div class="detail-projects">
-                                              {% for tag in task.tags.all %}
-                                              <span class="project"><i class="fa fa-tasks"></i>{{ tag.name }}</span>
-                                              {% endfor %}
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          
+                    <div class="task-wrapper">
+                      <div class="realtime-wrapper">
+                        <span class="task-circle"></span>
+                        <span>{{task.create_date | date:'Y-m-d'}}</span>
                       </div>
-                      {% endfor %}
-                      <div class="task-end">
-                          <span class="circle float-left"></span>
-                          <span class="real-time">已加载全部待完成内容</span>
+                      <div class="task-content-wrapper">
+                        <span></span>
+                        <div class="edit" id="{{task.pk}}">{{task.content}}</div>
+                        <button class="update_btn">更新</button>
                       </div>
+                      <div class="remind-time-wrapper">
+                        <span><i class="fa fa-bell"></i>{{task.remind_time | date:'Y-m-d'}}</span>
+                        <span><i  class="fa fa-edit task-edit" value={{task.pk}}></i></span>
+                      </div>
+                      <div class="bookmark-wrapper">
+                        <span><i class="fa fa-bookmark"></i></span>
+                        {% for tag in task.tags.all %}
+                        <span class="tag">{{tag}}</span>
+                        {% endfor %}
+                      </div>
+                      <div class="project-wrapper">
+                        <span class="project"><i class="fa fa-tasks"></i>{{task.category}}</span>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    <div class="task-end">
+                        <span></span>
+                        <div class="separator">
+                            <span></span>
+                            <span>已加载完待完成任务</span>
+                            <span></span>
+                        </div>
+                    </div>
                   </div>
-                  <div class="timeline-wrapper">
-                      {% for task in finished_tasks %}
-                      <div>
-                          <div class="task-wrapper">
-                              <div class="count-down float-right">
-                                  <canvas></canvas>
-                              </div>
-                              <div class="simple-task">
-                                  <div class="task-time">
-                                      <span class="circle float-left"></span>
-                                      <span class="real-time">{{ task.create_date | date:'Y-m-d' }}</span>
-                                  </div>
-                                  <div class="task-info">
-                                      <div class="task-circle float-left">
-                                          <span></span>
-                                      </div>
-                                      <div class="task-content">
-                                          <p class="content-text">{{ task.content }}</p>
-                                          <div class="detail-info">
-                                              <span class="remind-time"><i class="fa fa-bell"></i>{{ task.remind_time }}</span>
-                                              <span><i  class="fa fa-edit task-edit" value="{{ task.pk }}"></i></span>
-                                          </div>
-                                          <div class="detail-tags">
-                                              <span><i class="fa fa-bookmark"></i></span>
-                                              <span class="tag">{{ task.category }}</span>
-                                          </div>
-                                          <div class="detail-projects">
-                                                {% for tag in task.tags.all %}
-                                                <span class="project"><i class="fa fa-tasks"></i>{{ tag.name }}</span>
-                                                {% endfor %}
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
+                  <div class="tasks finished-tasks">
+                        {% for task in finished_tasks %}
+                        <div class="task-wrapper">
+                          <div class="realtime-wrapper">
+                            <span class="task-circle"></span>
+                            <span>{{task.create_date | date:'Y-m-d'}}</span>
                           </div>
-                      </div>
-                      {% endfor %}
-                      <div class="task-end">
-                          <span class="circle float-left"></span>
-                          <span class="real-time">已加载完成内容</span>
-                      </div>
+                          <div class="task-content-wrapper">
+                            <span></span>
+                            <div class="edit" id="{{task.pk}}">{{task.content}}</div>
+                            <button class="update_btn">更新</button>
+                          </div>
+                          <div class="remind-time-wrapper">
+                            <span><i class="fa fa-bell"></i>{{task.remind_time | date:'Y-m-d'}}</span>
+                            <span><i  class="fa fa-edit task-edit" value={{task.pk}}></i></span>
+                          </div>
+                          <div class="bookmark-wrapper">
+                            <span><i class="fa fa-bookmark"></i></span>
+                            {% for tag in task.tags.all %}
+                            <span class="tag">{{tag}}</span>
+                            {% endfor %}
+                          </div>
+                          <div class="project-wrapper">
+                            <span class="project"><i class="fa fa-tasks"></i>{{task.category}}</span>
+                          </div>
+                        </div>
+                        {% endfor %}
+                        <div class="task-end">
+                          <span></span>
+                          <div class="separator">
+                            <span></span>
+                            <span>已加载完全部任务</span>
+                            <span></span>
+                          </div>
+                        </div>
                   </div>
+                </div>
+            </div>
               </div>
               </div>
       </div>

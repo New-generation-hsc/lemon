@@ -33,7 +33,8 @@ $("#project-new").click(function(){
 	});
 });
 
-$(".close-btn").click(function(){
+$(".close-btn").click(function(event){
+	event.preventDefault();
 	$("#background").css("display", "none");
 	$("#dialog_projects").fadeOut("1500", function(){
 		$(this).css("top", "-100%");
